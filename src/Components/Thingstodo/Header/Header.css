@@ -1,0 +1,78 @@
+/* General header container styling */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: #3f51b5; /* Example color, replace with your theme color */
+    color: white;
+  }
+  
+  /* Title styling */
+  .title {
+    display: none;
+  }
+  
+  @media (min-width: 600px) {
+    .title {
+      display: block;
+      font-size: 1.5rem; /* Adjust font size as needed */
+    }
+  }
+  
+  /* Subtitle styling */
+  .subtitle {
+    font-size: 1.25rem; /* Adjust font size as needed */
+    margin-bottom: 8px; /* Add spacing between subtitle and search */
+  }
+  
+  /* Search container styling */
+  .search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Adjust the max-width as needed */
+  }
+  
+  /* Search box styling */
+  .search {
+    position: relative;
+    border-radius: 4px; /* Border radius equivalent to theme.shape.borderRadius */
+    background-color: rgba(255, 255, 255, 0.15); /* Equivalent to alpha(theme.palette.common.white, 0.15) */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+    margin-right: 16px; /* Equivalent to theme.spacing(2) */
+    width: 100%;
+  }
+  
+  /* Hover effect for search box */
+  .search:hover {
+    background-color: rgba(255, 255, 255, 0.25); /* Equivalent to alpha(theme.palette.common.white, 0.25) */
+  }
+  
+  /* Search icon styling */
+  .search-icon {
+    padding: 0 16px; /* Equivalent to theme.spacing(0, 2) */
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Input base styling */
+  .search-input {
+    color: black;
+    padding: 8px 8px 8px 0; /* Equivalent to theme.spacing(1, 1, 1, 0) */
+    padding-left: calc(1em + 32px); /* Equivalent to paddingLeft: `calc(1em + ${theme.spacing(4)}px)` */
+    transition: width 0.3s ease; /* Transition for width change */
+    width: 100%;
+  }
+  
+  /* Input width adjustment for larger screens */
+  @media (min-width: 960px) {
+    .search-input {
+      width: 20ch; /* Equivalent to 20ch */
+    }
+  }
+  

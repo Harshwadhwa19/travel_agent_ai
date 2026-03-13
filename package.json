@@ -1,0 +1,65 @@
+{
+  "name": "tripadvisor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.10",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/material": "^5.10.7",
+    "@react-google-maps/api": "^2.19.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.13.6",
+    "cjs": "^0.0.11",
+    "cors": "^2.8.5",
+    "framer-motion": "^7.10.3",
+    "homepage": ".",
+    "leaflet": "^1.9.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-leaflet": "^4.2.1",
+    "react-router-dom": "^6.4.1",
+    "react-scripts": "^5.0.1",
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+ "scripts": {
+  "start": "react-scripts start",
+  "build": "CI=false react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "server": "cd server && .\\venv\\Scripts\\activate && python app.py",
+  "dev": "concurrently \"npm start\" \"npm run server\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "No need",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}

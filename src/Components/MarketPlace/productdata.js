@@ -1,0 +1,128 @@
+export const productData = [
+  {
+    id: 1,
+    name: "Madhubani Painting",
+    image: "https://example.com/madhubani.jpg",
+    price: "₹2,500",
+    description: "Traditional Madhubani painting by artisans from Bihar.",
+    category: "Handicrafts",
+    rating: 4.8,
+  },
+  {
+    id: 2,
+    name: "Pashmina Shawl",
+    image: "https://example.com/pashmina.jpg",
+    price: "₹5,000",
+    description:
+      "Authentic Kashmiri Pashmina shawl, known for its luxurious feel and warmth.",
+    category: "Handicrafts",
+    rating: 4.5,
+  },
+  {
+    id: 4,
+    name: "Jaipur Blue Pottery Vase",
+    image: "https://example.com/bluepottery.jpg",
+    price: "₹1,200",
+    description:
+      "Handcrafted Blue Pottery vase from Jaipur, featuring intricate floral designs.",
+    category: "Handicrafts",
+    rating: 4.6,
+  },
+  {
+    id: 3,
+    name: "Mysore Pak",
+    image: "https://example.com/mysorepak.jpg",
+    price: "₹500",
+    description: "Delicious Mysore Pak, a traditional sweet from Karnataka.",
+    category: "Local Food Products",
+    rating: 4.7,
+  },
+  {
+    id: 5,
+    name: "Kerala Banana Chips",
+    image: "https://example.com/bananachips.jpg",
+    price: "₹300",
+    description:
+      "Crispy and savory Kerala Banana Chips, a popular snack from South India.",
+    category: "Local Food Products",
+    rating: 4.4,
+  },
+  {
+    id: 6,
+    name: "Kutch Embroidered Cushion Cover",
+    image: "https://example.com/kutchcushion.jpg",
+    price: "₹1,800",
+    description:
+      "Vibrant cushion cover featuring traditional Kutch embroidery from Gujarat.",
+    category: "Handicrafts",
+    rating: 4.9,
+  },
+  {
+    id: 7,
+    name: "Rajasthani Miniature Painting",
+    image: "https://example.com/rajasthani_painting.jpg",
+    price: "₹3,500",
+    description:
+      "Exquisite Rajasthani miniature painting, showcasing traditional art.",
+    category: "Handicrafts",
+    rating: 4.9,
+  },
+  {
+    id: 8,
+    name: "Banarasi Silk Saree",
+    image: "https://example.com/banarasi_saree.jpg",
+    price: "₹12,000",
+    description: "Luxurious Banarasi silk saree with intricate zari work.",
+    category: "Textiles",
+    rating: 4.8,
+  },
+  {
+    id: 9,
+    name: "Kolkata Handrolled Clay Dolls",
+    image: "https://example.com/kolkata_dolls.jpg",
+    price: "₹800",
+    description:
+      "Handrolled clay dolls from Kolkata, each with unique expressions.",
+    category: "Crafts",
+    rating: 4.7,
+  },
+  {
+    id: 10,
+    name: "Hyderabadi Biryani Spice Mix",
+    image: "https://example.com/hyderabadi_biryani.jpg",
+    price: "₹250",
+    description:
+      "Authentic spice mix for preparing the famous Hyderabadi biryani.",
+    category: "Local Food Products",
+    rating: 4.6,
+  },
+  {
+    id: 11,
+    name: "Goan Cashew Nuts",
+    image: "https://example.com/goan_cashew.jpg",
+    price: "₹1,200",
+    description: "Premium Goan cashew nuts, roasted and salted.",
+    category: "Local Snacks",
+    rating: 4.9,
+  },
+  {
+    id: 12,
+    name: "Mysore Sandalwood Soap",
+    image: "https://example.com/mysore_soap.jpg",
+    price: "₹350",
+    description:
+      "Luxury sandalwood soap from Mysore, known for its aromatic properties.",
+    category: "Beauty Products",
+    rating: 4.8,
+  },
+  {
+    id: 13,
+    name: "Pondicherry Handcrafted Pottery",
+    image: "https://example.com/pondicherry_pottery.jpg",
+    price: "₹1,500",
+    description:
+      "Handcrafted pottery from Pondicherry, featuring vibrant colors and designs.",
+    category: "Home Decor",
+    rating: 4.7,
+  },
+];

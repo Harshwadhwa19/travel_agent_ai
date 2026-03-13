@@ -1,0 +1,4 @@
+2026-03-13 01:06:47,824 DEBUG: Using proactor: IocpProactor [in C:\Users\HP\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\proactor_events.py:631]
+2026-03-13 01:10:40,705 DEBUG: Creating trip for user_id: 1, data: {'name': 'Testing Route', 'destination': 'Paris', 'start_date': '2024-05-01', 'end_date': '2024-05-10', 'budget': 1500.5} [in C:\Users\HP\Downloads\Travello-Agentic_Travel_planning_system-main\server\routes\trip_routes.py:15]
+2026-03-13 01:10:40,708 DEBUG: Trip object created: <Trip (transient 1987152570960)> [in C:\Users\HP\Downloads\Travello-Agentic_Travel_planning_system-main\server\routes\trip_routes.py:37]
+2026-03-13 01:10:40,795 INFO: Trip created successfully with ID: 3 [in C:\Users\HP\Downloads\Travello-Agentic_Travel_planning_system-main\server\routes\trip_routes.py:40]

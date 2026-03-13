@@ -1,0 +1,12 @@
+Flask
+Flask-Cors
+Flask-SQLAlchemy
+Flask-JWT-Extended
+mysql-connector-python
+mistralai
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-generativeai
+python-dotenv
+requests
