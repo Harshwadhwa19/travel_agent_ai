@@ -7,6 +7,7 @@ import apiClient from "../api/apiClient";
 function SoloBuddyMatcher() {
   const [matches, setMatches] = useState([]);
   const [chats, setChats] = useState([]);
+  const [requests, setRequests] = useState({ incoming: [], outgoing: [] });
   const [activeChat, setActiveChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -20,6 +21,9 @@ function SoloBuddyMatcher() {
 
       const chatRes = await apiClient.get('/buddy/chats');
       setChats(chatRes.data || []);
+
+      const requestRes = await apiClient.get('/buddy/requests');
+      setRequests(requestRes.data || { incoming: [], outgoing: [] });
     } catch (error) {
       console.error("Error fetching buddy data", error);
     } finally {
@@ -57,6 +61,28 @@ function SoloBuddyMatcher() {
       toast({ title: "Failed to connect", status: "error" }); 
     }
   };
+
+  const handleRespond = async (matchId, status) => {
+    try {
+      await apiClient.post('/buddy/respond-connection', { match_id: matchId, status });
+      toast({ title: `Connection ${status}`, status: status === 'accepted' ? 'success' : 'info' });
+      fetchData();
+    } catch (e) {
+      toast({ title: "Action failed", status: "error" });
+    }
+  };
+
+  const handleRemove = async (matchId) => {
+    try {
+      await apiClient.delete(`/buddy/connections/${matchId}`);
+      toast({ title: "Removed", status: "info" });
+      if (activeChat?.match_id === matchId) setActiveChat(null);
+      fetchData();
+    } catch (e) {
+      toast({ title: "Failed to remove", status: "error" });
+    }
+  };
+
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !activeChat) return;
@@ -112,28 +138,78 @@ function SoloBuddyMatcher() {
 
             <Divider />
 
+            <Heading size="md" color="blue.600">Pending Requests</Heading>
+            {requests.incoming.length === 0 && requests.outgoing.length === 0 ? (
+               <Text fontSize="sm" color="gray.400" fontStyle="italic">No pending requests</Text>
+            ) : (
+              <VStack align="stretch" spacing={3}>
+                {requests.incoming.map(req => (
+                  <Box key={req.match_id} p={3} bg="orange.50" borderRadius="lg" border="1px solid" borderColor="orange.100">
+                    <HStack justify="space-between">
+                      <VStack align="start" spacing={0}>
+                        <Text fontWeight="bold" fontSize="sm">{req.sender_username}</Text>
+                        <Text fontSize="xs">wants to connect!</Text>
+                      </VStack>
+                      <HStack>
+                        <Button size="xs" colorScheme="green" onClick={() => handleRespond(req.match_id, 'accepted')}>Accept</Button>
+                        <Button size="xs" colorScheme="red" variant="ghost" onClick={() => handleRespond(req.match_id, 'rejected')}>Decline</Button>
+                      </HStack>
+                    </HStack>
+                  </Box>
+                ))}
+                {requests.outgoing.map(req => (
+                  <Box key={req.match_id} p={3} bg="gray.50" borderRadius="lg">
+                    <HStack justify="space-between">
+                      <Text fontSize="sm">Sent to <b>{req.receiver_username}</b></Text>
+                      <Button size="xs" variant="ghost" colorScheme="red" onClick={() => handleRemove(req.match_id)}>Cancel</Button>
+                    </HStack>
+                  </Box>
+                ))}
+              </VStack>
+            )}
+
+            <Divider />
+
             <Heading size="md" color="blue.600">My Connections</Heading>
-            {chats.map(chat => (
-              <Box 
-                key={chat.match_id} 
-                p={4} 
-                bg={activeChat?.match_id === chat.match_id ? "blue.50" : "white"}
-                cursor="pointer" 
-                borderRadius="xl" 
-                border="1px solid"
-                borderColor={activeChat?.match_id === chat.match_id ? "blue.200" : "gray.100"}
-                onClick={() => {
-                  setActiveChat(chat);
-                  setMessages([]);
-                }}
-              >
-                <HStack>
-                  <Avatar name={chat.other_username} size="sm" />
-                  <Text fontWeight="bold">{chat.other_username}</Text>
-                  {activeChat?.match_id === chat.match_id && <Badge colorScheme="green">CHAT OPEN</Badge>}
-                </HStack>
-              </Box>
-            ))}
+            {chats.length === 0 ? (
+              <Text fontSize="sm" color="gray.400" fontStyle="italic">No active connections yet</Text>
+            ) : (
+              chats.map(chat => (
+                <Box 
+                  key={chat.match_id} 
+                  p={4} 
+                  bg={activeChat?.match_id === chat.match_id ? "blue.50" : "white"}
+                  cursor="pointer" 
+                  borderRadius="xl" 
+                  border="1px solid"
+                  borderColor={activeChat?.match_id === chat.match_id ? "blue.200" : "gray.100"}
+                  onClick={() => {
+                    setActiveChat(chat);
+                    setMessages([]);
+                  }}
+                >
+                  <HStack justify="space-between">
+                    <HStack>
+                      <Avatar name={chat.other_username} size="sm" />
+                      <Text fontWeight="bold">{chat.other_username}</Text>
+                      {activeChat?.match_id === chat.match_id && <Badge colorScheme="green">CHAT OPEN</Badge>}
+                    </HStack>
+                    <Button 
+                      size="xs" 
+                      variant="ghost" 
+                      colorScheme="red" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemove(chat.match_id);
+                      }}
+                    >
+                      Unmatch
+                    </Button>
+                  </HStack>
+                </Box>
+              ))
+            )}
+
           </VStack>
 
           {/* Chat Section */}

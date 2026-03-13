@@ -146,3 +146,47 @@ def manage_messages(match_id):
         db.session.add(new_msg)
         db.session.commit()
         return jsonify({"msg": "Sent"}), 201
+
+@buddy_bp.route('/requests', methods=['GET'])
+@jwt_required()
+def get_requests():
+    user_id = int(get_jwt_identity())
+    
+    # Incoming requests (receiver is current user)
+    incoming = BuddyMatch.query.filter_by(receiver_id=user_id, status='pending').all()
+    
+    # Outgoing requests (sender is current user)
+    outgoing = BuddyMatch.query.filter_by(sender_id=user_id, status='pending').all()
+    
+    return jsonify({
+        "incoming": [{
+            "match_id": r.id,
+            "sender_id": r.sender_id,
+            "sender_username": r.sender.username,
+            "timestamp": r.timestamp.isoformat()
+        } for r in incoming],
+        "outgoing": [{
+            "match_id": r.id,
+            "receiver_id": r.receiver_id,
+            "receiver_username": r.receiver.username,
+            "timestamp": r.timestamp.isoformat()
+        } for r in outgoing]
+    }), 200
+
+@buddy_bp.route('/connections/<int:match_id>', methods=['DELETE'])
+@jwt_required()
+def remove_connection(match_id):
+    user_id = int(get_jwt_identity())
+    match = BuddyMatch.query.get(match_id)
+    
+    if not match or (match.sender_id != user_id and match.receiver_id != user_id):
+        return jsonify({"error": "Unauthorized or not found"}), 403
+        
+    db.session.delete(match)
+    
+    # Also delete associated messages? Usually yes to clean up.
+    PrivateMessage.query.filter_by(match_id=match_id).delete()
+    
+    db.session.commit()
+    return jsonify({"msg": "Connection/Request removed"}), 200
+
