@@ -1,0 +1,58 @@
+{
+    "experiences": [
+        {
+            "title": "Goa Beach Adventure",
+            "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "title": "Jaipur Cultural Tour",
+            "image": "https://images.unsplash.com/photo-1599661046289-e31897850029?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "title": "Mumbai Street Food",
+            "image": "https://images.unsplash.com/photo-1528613094057-a1699d82d43d?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "hotels": [
+        {
+            "name": "Grand Luxury Hotel",
+            "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "name": "Comfort Inn",
+            "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "name": "Budget Stay",
+            "image": "https://images.unsplash.com/photo-1506059612708-99d6c258160e?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "beaches": [
+        {
+            "title": "Tulum, Mexico",
+            "image": "https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "title": "Bora Bora",
+            "image": "https://images.unsplash.com/photo-1500993851916-60605626ec92?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "title": "Hawaii",
+            "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "products": [
+        {
+            "name": "Madhubani Painting",
+            "image": "https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "name": "Pashmina Shawl",
+            "image": "https://images.unsplash.com/photo-1589150116960-b0ea370bf021?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "name": "Kerala Banana Chips",
+            "image": "https://images.unsplash.com/photo-1621447509323-570a2027457f?auto=format&fit=crop&w=800&q=80"
+        }
+    ]
+}
