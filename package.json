@@ -13,6 +13,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
     "axios": "^1.13.6",
     "cjs": "^0.0.11",
     "cors": "^2.8.5",
@@ -25,20 +27,20 @@
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.4.1",
     "react-scripts": "^5.0.1",
-    "ajv": "^8.11.0",
-    "ajv-formats": "^2.1.1",
     "web-vitals": "^2.1.4"
   },
+
+
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
- "scripts": {
-  "start": "react-scripts start",
-  "build": "CI=false react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
-  "server": "cd server && .\\venv\\Scripts\\activate && python app.py",
-  "dev": "concurrently \"npm start\" \"npm run server\""
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "CI=false react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": ".\\venv\\Scripts\\python.exe server/app.py",
+    "dev": "concurrently \"npm start\" \"npm run server\""
   },
   "eslintConfig": {
     "extends": [

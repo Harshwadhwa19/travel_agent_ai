@@ -1,0 +1,5 @@
+--- Users ---
+ID: 1 | Username: as | Email: as@gmail.com
+
+--- Trips ---
+ID: 1 | Creator: 1 | Dest: 'manali' | Solo: True | Dates: 2026-03-17 to 2026-03-20

@@ -14,21 +14,25 @@ def match_solo():
     if not user_trips:
         return jsonify({"msg": "No active solo trips found for matching", "matches": []}), 200
     
-    # Normalize destinations: lowercase and strip whitespace
-    unique_destinations = list(set([t.destination.strip().lower() for t in user_trips]))
-    
     matches = []
-    # Find other solo travelers to the same destinations
-    for dest in unique_destinations:
-        # Use ilike with trimmed search term
+    # Find other solo travelers with overlapping destinations and dates
+    for my_trip in user_trips:
+        dest = my_trip.destination.strip().lower()
+        if not dest: continue
+        
+        # Find other solo trips to the same destination
+        # We also check for date overlap: 
+        # (StartA <= EndB) and (EndA >= StartB)
         other_solo_trips = Trip.query.filter(
             Trip.creator_id != user_id,
             Trip.is_solo == True,
-            Trip.destination.ilike(f'%{dest}%')
+            Trip.destination.ilike(f'%{dest}%'),
+            Trip.start_date <= my_trip.end_date,
+            Trip.end_date >= my_trip.start_date
         ).all()
         
         for ot in other_solo_trips:
-            # Check if this user is already in our matches list to avoid duplicates from multiple trips
+            # Check if this user is already in our matches list
             if any(m['user_id'] == ot.creator_id for m in matches):
                 continue
 
@@ -44,11 +48,13 @@ def match_solo():
                 "destination": ot.destination,
                 "trip_id": ot.id,
                 "trip_name": ot.name,
+                "dates": f"{ot.start_date.isoformat()} to {ot.end_date.isoformat()}",
                 "status": existing.status if existing else "none",
                 "match_id": existing.id if existing else None
             })
             
     return jsonify({"matches": matches}), 200
+
 
 @buddy_bp.route('/request-connection', methods=['POST'])
 @jwt_required()
@@ -173,7 +179,38 @@ def get_requests():
         } for r in outgoing]
     }), 200
 
+@buddy_bp.route('/seed-test', methods=['POST'])
+def seed_test():
+    # Helper to seed a second user and trip for matching tests
+    from models import User, Trip
+    from datetime import date
+    
+    # Check if test user exists
+    test_user = User.query.filter_by(username='buddy_tester').first()
+    if not test_user:
+        test_user = User(username='buddy_tester', email='test@example.com')
+        test_user.set_password('password123')
+        db.session.add(test_user)
+        db.session.flush()
+    
+    # Create a trip for this user to Manali
+    existing_trip = Trip.query.filter_by(creator_id=test_user.id, destination='manali').first()
+    if not existing_trip:
+        new_trip = Trip(
+            name="Testing Manali",
+            destination="manali",
+            start_date=date(2026, 3, 17),
+            end_date=date(2026, 3, 20),
+            creator_id=test_user.id,
+            is_solo=True
+        )
+        db.session.add(new_trip)
+    
+    db.session.commit()
+    return jsonify({"msg": "Test data seeded. User 'buddy_tester' is now going to Manali on 2026-03-17."}), 201
+
 @buddy_bp.route('/connections/<int:match_id>', methods=['DELETE'])
+
 @jwt_required()
 def remove_connection(match_id):
     user_id = int(get_jwt_identity())

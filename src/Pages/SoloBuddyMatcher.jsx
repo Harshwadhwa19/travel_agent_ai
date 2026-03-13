@@ -121,7 +121,9 @@ function SoloBuddyMatcher() {
                     <VStack align="start" spacing={0} flex={1}>
                       <Text fontWeight="bold" fontSize="lg">{m.username}</Text>
                       <Badge colorScheme="purple">Solo in {m.destination}</Badge>
+                      <Text fontSize="xs" fontWeight="semibold" color="teal.600">{m.dates}</Text>
                       <Text fontSize="xs" color="gray.500">Trip: {m.trip_name}</Text>
+
                     </VStack>
                     <Button 
                       colorScheme={m.status === 'none' ? 'teal' : 'gray'} 
